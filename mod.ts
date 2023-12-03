@@ -20,6 +20,16 @@ export function transformCode(code: string, vars: Record<string, any>,name: stri
     // 変数定義の行を解析
     const varDefMatch = line.match(/^(\w+)\s*=\s*(.+)$/);
     if (varDefMatch) {
+      let varValue = varDefMatch[2];
+      // もし変数の値がinp(質問内容)だったら、入力を求める
+      const inpMatch = varValue.match(/^inp\((.+)\)$/);
+      if (inpMatch) {
+        const question = inpMatch[1];
+        const answer = prompt(question);
+        if (answer !== null) {
+          varDefMatch[2] = answer;
+        }
+      }
       newCode.push(`let ${varDefMatch[1]} = ${varDefMatch[2]};`);
       continue;
     }

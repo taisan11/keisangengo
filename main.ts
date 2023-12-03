@@ -6,8 +6,8 @@ const kuro = 20;
 const miritime = Date.now()
 
 const oldCode = `
-imp(miritime)
-miritime+60
+a = 1279828
+a+60
 `;
 const newCode = transformCode(oldCode, { kuro,miritime },"add");  // 変数のマップを渡す
 console.log(newCode);
