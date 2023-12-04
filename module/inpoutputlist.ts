@@ -1,7 +1,6 @@
 /**
- * 自作言語2JSorTS
- * @param code 変換元のコード.
- * @param vars MODシステム用変数マップ.
+ * 自作言語のinp要素を配列で出力する
+ * @param code 元のコード.
  * @example const newCode = transformCode(oldCode, { kuro,miritime },"add");
  * const result = eval(Code);
  * console.log(result);
