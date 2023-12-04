@@ -1,6 +1,7 @@
 function add() {
   let a = 1;
-  let b = 2;
-  return a+b;
+  let b = 5;
+  let kuro = 20;
+  return a+b+kuro;
 }
 console.log(add());
