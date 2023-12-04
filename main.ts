@@ -5,10 +5,7 @@ const kuro = 20;
 const miritime = Date.now();
 
 const oldCode = `
-a=inp(1>)
-b=5
-imp(kuro)
-a+b+kuro
+1+1
 `;
 console.log(inpOutputList(oldCode));
 const newCode = transformCode(oldCode, { kuro, miritime }, "add"); // 変数のマップを渡す
