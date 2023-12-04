@@ -1,17 +1,30 @@
-import { transformCode } from "./mod.ts";
-import $ from "https://deno.land/x/dax@0.35.0/mod.ts";
+import { inpOutputList, transformCode } from "./mod.ts";
 
 // MOD
 const kuro = 20;
 const miritime = Date.now();
 
 const oldCode = `
-a = 1279828
-a+60
+1+1
 `;
+console.log(inpOutputList(oldCode));
 const newCode = transformCode(oldCode, { kuro, miritime }, "add"); // 変数のマップを渡す
 console.log(newCode);
-const Code = newCode + "\nadd();";
-// 実行
-const result = eval(Code);
-console.log(result);
+const Code = newCode + "\nconsole.log(add());";
+
+// コードを一時ファイルに書き出す
+await Deno.writeTextFile("./temp.js", Code);
+
+// 新しいプロセスを作成してコードを実行
+const p = Deno.run({
+  cmd: ["deno", "run", "--allow-read", "./temp.js"],
+  stdout: "piped",
+});
+
+// 新しいプロセスの標準出力を取得
+const output = await p.output();
+
+// Uint8Arrayを文字列に変換
+const outputStr = new TextDecoder().decode(output);
+
+console.log(outputStr);
