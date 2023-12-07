@@ -20,7 +20,6 @@ const p = Deno.run({
   cmd: ["deno", "run", "--allow-read", "./temp.js"],
   stdout: "piped",
 });
-
 // 新しいプロセスの標準出力を取得
 const output = await p.output();
 
