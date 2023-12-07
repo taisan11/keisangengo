@@ -5,7 +5,7 @@ const kuro = 20;
 const miritime = Date.now();
 
 const oldCode = `
-1+1
+1+101
 `;
 console.log(inpOutputList(oldCode));
 const newCode = transformCode(oldCode, { kuro, miritime }, "add"); // 変数のマップを渡す
