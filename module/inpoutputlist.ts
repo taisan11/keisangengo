@@ -1,10 +1,8 @@
 /**
- * 自作言語のinp要素を配列で出力する
- * @param code 元のコード.
- * @example const newCode = transformCode(oldCode, { kuro,miritime },"add");
- * const result = eval(Code);
- * console.log(result);
- * @returns シンプルなJScode.
+ * Output an array of inp elements of homemade language
+ * @param code source code.
+ * @example console.loh(inpOutputList(code));
+ * @returns Simple Array.
  */
 export function inpOutputList(
   code: string,

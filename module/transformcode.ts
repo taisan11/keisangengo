@@ -1,13 +1,13 @@
 /**
- * 自作言語2JSorTS
- * @param code 変換元のコード.
- * @param vars MODシステム用変数マップ.
- * @param name 関数名.
- * @pram inpd 配列.
+ * JSorTS2Homebrew language
+ * @param code Conversion source code.
+ * @param vars Variable map for MOD system.
+ * @param name function name.
+ * @pram inpd Array for inp()..
  * @example const newCode = transformCode(oldCode, { kuro,miritime },"add");
  * const result = eval(Code);
  * console.log(result);
- * @returns シンプルなJScode.
+ * @returns Simple JScode.
  */
 export function transformCode(
   code: string,
