@@ -1,22 +1,17 @@
 # Keisangengo
 
-計算をするためだけにAIと一緒に開発した言語 仕様はわかるけど正規表現が何とも...
-## 使い方
-transformCode(code,vars,name,inpd)
-code -変換元コード(1+1)
-vars -MODマップ({kuro,sx....})
-name -出力される関数の名前(add)
-inpd? -inp()の代入([1,3,1])
-inpOutputList()
-code -変換元コード(inp(あれ>))
-## 実装予定機能
+Languages developed to do calculations 仕様はわかるけど正規表現が何とも...
+## How to use
+**transformCode(code,vars,name,inpd)**<br>
+code -Conversion source code(1+1)<br>
+vars -Variable map for MOD system({kuro,sx....})<br>
+name -Name of function to be output(add)<br>
+inpd? -Array for inp()([1,3,1])<br>
+**inpOutputList()**<br>
+code -source code(inp(What number?>))<br>
+## specification
 
-- inp()のみの事前出力 配列での出力
-- inp()の外部変数受け渡し 配列での入力 inp()が複数ある場合上から
-
-## 仕様
-
-**四則演算**<br> +,-,*,/<br> 普通<br> **変数**<br> a=100<br>
-変数定義しなくていい constとか letとか...<br> **import**<br> imp(MOD名)<br>
-コンパイラ、実行コード内に定義されてる変数とかを取り込みます<br> **input**<br>
-inp(質問>)<br> 外部からの入力を受け付けます<br>
+**basic arithmetic operations**<br> +,-,*,/<br>**variable**<br> a=100<br>
+No need to define variables<br> **import**<br> imp(MOD Name)<br>
+import the MOD<br> **input**<br>
+inp(question>)<br> Accepts external input<br>

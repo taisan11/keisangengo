@@ -1,4 +1,4 @@
 function add() {
-  return 1+101;
+  return 2/3;
 }
 console.log(add());
