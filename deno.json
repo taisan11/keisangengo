@@ -2,5 +2,9 @@
   "tasks": {
     "dev": "deno run -A --watch main.ts",
     "build": "deno run -A build.ts"
+  },
+  "imports": {
+    "@david/dax": "jsr:@david/dax@^0.41.0",
+    "@deno/dnt": "jsr:@deno/dnt@^0.41.2"
   }
 }
