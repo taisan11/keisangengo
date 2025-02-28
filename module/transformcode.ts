@@ -28,20 +28,17 @@ export function transformCode(
     // 変数定義の行を解析
     const varDefMatch = line.match(/^(\w+)\s*=\s*(.+)$/);
     if (varDefMatch) {
-      let varValue = varDefMatch[2];
+      const 変数の値 = varDefMatch[2];
       // もし変数の値がinp(質問内容)だったら、入力を求める
-      const inpMatch = varValue.match(/^inp\((.+)\)$/);
+      //inpMatchは質問文も含まれる。
+      const inpMatch = 変数の値.match(/^inp\((.+)\)$/);
       if (inpMatch) {
         if (inpd && inpd.length > inpCount) {
           // inpdが存在し、まだ使用されていない値がある場合、その値を直接代入
           varDefMatch[2] = inpd[inpCount];
         } else {
-          // それ以外の場合、ユーザーにプロンプトを表示
-          const question = inpMatch[1];
-          const answer = prompt(question);
-          if (answer !== null) {
-            varDefMatch[2] = answer;
-          }
+          // プロンプトのハードコードをやめてエラーを返す。
+          return `Error: inp() requires input prompt "${inpMatch[1]}"`;
         }
         inpCount++; // inp()の出現回数を増やす
       }
@@ -69,9 +66,9 @@ export function transformCode(
     }
 
     // 一致しない行はエラーメッセージを返す
-    // return `Error: Invalid line "${line}"`;
+    return `Error: Invalid line "${line}"`;
   }
 
   // 新しいコードを生成
-  return `function ${name}() {\n  ${newCode.join("\n  ")}\n}`;
+  return `function ${name}() {\n  ${newCode.join(";\n  ")}\n}`;
 }
