@@ -1,4 +1,5 @@
 import { inpOutputList, transformCode } from "./mod.ts";
+import {$}from "@david/dax"
 
 // MOD
 const kuro = 20;
@@ -16,14 +17,12 @@ const Code = newCode + "\nconsole.log(add());";
 await Deno.writeTextFile("./temp.js", Code);
 
 // 新しいプロセスを作成してコードを実行
-const p = Deno.run({
-  cmd: ["deno", "run", "--allow-read", "./temp.js"],
-  stdout: "piped",
-});
+const p = new Deno.Command(Deno.execPath(),{
+  args:["run", "--allow-read", "./temp.js"]
+})
 // 新しいプロセスの標準出力を取得
-const output = await p.output();
-
+const { code, stdout, stderr } = await p.output();
 // Uint8Arrayを文字列に変換
-const outputStr = new TextDecoder().decode(output);
+const outputStr = new TextDecoder().decode(stdout);
 
 console.log(outputStr);

@@ -28,7 +28,6 @@ export function transformCode(
     // 変数定義の行を解析
     const varDefMatch = line.match(/^(\w+)\s*=\s*(.+)$/);
     if (varDefMatch) {
-      // deno-lint-ignore prefer-const
       let varValue = varDefMatch[2];
       // もし変数の値がinp(質問内容)だったら、入力を求める
       const inpMatch = varValue.match(/^inp\((.+)\)$/);

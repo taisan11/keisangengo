@@ -14,7 +14,7 @@ export function inpOutputList(
   const regex = /inp\((.*?)\)/g;
 
   // inp()の引数を保存するための配列
-  const inpArgs = [];
+  const inpArgs: string[] = [];
 
   // 各行をループ
   for (const line of lines) {
