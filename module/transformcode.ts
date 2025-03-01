@@ -13,7 +13,7 @@ export function transformCode(
   code: string,
   // deno-lint-ignore no-explicit-any
   vars: Record<string, any>,
-  name: string,
+  name?: string,
   inpd?: string[],
 ): string {
   // コードを行に分割
@@ -66,9 +66,11 @@ export function transformCode(
     }
 
     // 一致しない行はエラーメッセージを返す
-    return `Error: Invalid line "${line}"`;
+    // return `Error: Invalid line "${line}"`;
   }
-
+  if (!name) {
+    return newCode.join(";\n");
+  }
   // 新しいコードを生成
   return `function ${name}() {\n  ${newCode.join(";\n  ")}\n}`;
 }
