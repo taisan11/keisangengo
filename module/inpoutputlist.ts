@@ -6,7 +6,7 @@
  */
 export function inpOutputList(
   code: string,
-): string {
+): string[] {
   // コードを行に分割
   const lines = code.split("\n");
 
@@ -26,6 +26,5 @@ export function inpOutputList(
     }
   }
 
-  console.log(inpArgs);
-  return "inpArgs";
+  return inpArgs;
 }

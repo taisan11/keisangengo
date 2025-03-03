@@ -1,8 +1,20 @@
 import { Siki } from "./SikiPurse.ts";
+
+export interface Options {
+  // deno-lint-ignore ban-types
+  mod?: Record<string, Function | number>;
+  name?: string;
+  inpd?: (string|number)[];
+}
+
+function be(ms:string) {
+  return `console.error('%c${ms}','color:red;')`;
+}
+
 /**
  * JSorTS2Homebrew language
  * @param code Conversion source code.
- * @param vars Variable map for MOD system.
+ * @param mod Variable map for MOD system.
  * @param name function name.
  * @pram inpd Array for inp()..
  * @example const newCode = transformCode(oldCode, { kuro,miritime },"add");
@@ -12,10 +24,7 @@ import { Siki } from "./SikiPurse.ts";
  */
 export function transformCode(
   code: string,
-  // deno-lint-ignore no-explicit-any
-  vars: Record<string, any>,
-  name?: string,
-  inpd?: string[],
+  { mod, name, inpd }: Options,
 ): string {
   // コードを行に分割
   const lines = code.split("\n").filter((line) => line.trim() != "");
@@ -33,27 +42,43 @@ export function transformCode(
       //inpMatchは質問文も含まれる。
       const inpMatch = 変数の値.match(/^inp\((.+)\)$/);
       if (inpMatch) {
+        inpCount++;
         if (inpd && inpd.length > inpCount) {
           // inpdが存在し、まだ使用されていない値がある場合、その値を直接代入
-          varDefMatch[2] = inpd[inpCount];
+          newCode.push(`let ${varDefMatch[1]} = ${inpd[inpCount]}`);
+          continue;
         } else {
           // プロンプトのハードコードをやめてエラーを返す。
-          return `Error: inp() requires input prompt "${inpMatch[1]}"`;
+          newCode.push(be(`Error: inp() requires input "${inpMatch[1]}"`));
+          continue;
         }
-        inpCount++; // inp()の出現回数を増やす
       }
-      newCode.push(`let ${varDefMatch[1]} = ${varDefMatch[2]}`);
+      newCode.push(`let ${varDefMatch[1]} = ${Siki(varDefMatch[2])}`);
       continue;
     }
 
     // モジュールインポートの行を解析
-    const impMatch = line.match(/^imp\((\w+)\)$/);
+    const impMatch = line.match(/^imp\((\w+)\)\((.*)\)$/);
     if (impMatch) {
+      if (!mod) {
+        newCode.push(be("Error: Module not found"));
+        continue;
+      }
       const varName = impMatch[1];
-      if (varName in vars) {
-        newCode.push(`let ${varName} = ${vars[varName]};`);
+      if (varName in mod) {
+        const modType = typeof mod[varName];
+        //関数の場合は読み込んだ場所で実行する制約を持つ
+        if (modType == "function" && impMatch[2] != null) {
+          newCode.push(`${mod[varName].toString()}`);
+          newCode.push(`${varName}(${impMatch[2]})`);
+          continue;
+        } else if (modType == "function") {
+          newCode.push(be('Error: Function requires arguments'));
+          continue;
+        }
+        newCode.push(`let ${varName} = ${mod[varName]};`);
       } else {
-        return `Error: Variable "${varName}" not found`;
+        newCode.push(be(`Error: Module "${varName}" not found`));
       }
       continue;
     }
@@ -70,7 +95,7 @@ export function transformCode(
     }
 
     // 一致しない行はエラーメッセージを返す
-    newCode.push(`console.log('Error: Invalid line "${line}"')`);
+    newCode.push(be('Error: Invalid line "${line}"'))
   }
   if (!name) {
     return newCode.join(";\n") + ";";
