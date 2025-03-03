@@ -26,10 +26,11 @@ export function transformCode(
   code: string,
   { mod, name, inpd }: Options,
 ): string {
+  const onemoji: string[] = [];
   // コードを行に分割
   const lines = code.split("\n").filter((line) => line.trim() != "");
   // 新しいコードを生成するための配列
-  const newCode = [];
+  const newCode:string[] = [];
   let inpCount = 0; // inp()の出現回数を数える変数
 
   // 各行を解析
@@ -59,6 +60,9 @@ export function transformCode(
           newCode.push(be(`Error: inp() requires input "${inpMatch[1]}"`));
           continue;
         }
+      }
+      if (varDefMatch[1].length == 1) {
+        onemoji.push(varDefMatch[1]);
       }
       newCode.push(`let ${varDefMatch[1]} = ${Siki(varDefMatch[2])}`);
       continue;
@@ -91,7 +95,7 @@ export function transformCode(
     }
 
     // 計算式の行を解析
-    const sikiResult = Siki(line);
+    const sikiResult = Siki(line,onemoji);
     if (sikiResult != "No Siki") {
       newCode.push(`return ${sikiResult}`);
       continue;
