@@ -1,3 +1,4 @@
+import { Siki } from "./SikiPurse.ts";
 /**
  * JSorTS2Homebrew language
  * @param code Conversion source code.
@@ -17,8 +18,7 @@ export function transformCode(
   inpd?: string[],
 ): string {
   // コードを行に分割
-  const lines = code.split("\n");
-
+  const lines = code.split("\n").filter((line) => line.trim() != "");
   // 新しいコードを生成するための配列
   const newCode = [];
   let inpCount = 0; // inp()の出現回数を数える変数
@@ -42,7 +42,7 @@ export function transformCode(
         }
         inpCount++; // inp()の出現回数を増やす
       }
-      newCode.push(`let ${varDefMatch[1]} = ${varDefMatch[2]};`);
+      newCode.push(`let ${varDefMatch[1]} = ${varDefMatch[2]}`);
       continue;
     }
 
@@ -59,14 +59,13 @@ export function transformCode(
     }
 
     // 計算式の行を解析
-    const calcMatch = line.match(/^([\d+\-*/^ ]+)$/);
-    if (calcMatch) {
-      newCode.push(`return ${calcMatch[1]};`);
+    const sikiResult = Siki(line);
+    if (sikiResult != "No Siki") {
+      newCode.push(`return ${sikiResult}`);
       continue;
     }
 
     if (!line) {
-      // 空行は無視
       continue;
     }
 
@@ -74,7 +73,7 @@ export function transformCode(
     newCode.push(`console.log('Error: Invalid line "${line}"')`);
   }
   if (!name) {
-    return newCode.join(";\n");
+    return newCode.join(";\n") + ";";
   }
   // 新しいコードを生成
   return `function ${name}() {\n  ${newCode.join(";\n  ")}\n}`;
