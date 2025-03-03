@@ -59,14 +59,19 @@ export function transformCode(
     }
 
     // 計算式の行を解析
-    const calcMatch = line.match(/^(.+)$/);
+    const calcMatch = line.match(/^([\d+\-*/^ ]+)$/);
     if (calcMatch) {
       newCode.push(`return ${calcMatch[1]};`);
       continue;
     }
 
+    if (!line) {
+      // 空行は無視
+      continue;
+    }
+
     // 一致しない行はエラーメッセージを返す
-    // return `Error: Invalid line "${line}"`;
+    newCode.push(`console.log('Error: Invalid line "${line}"')`);
   }
   if (!name) {
     return newCode.join(";\n");
