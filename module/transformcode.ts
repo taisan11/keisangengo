@@ -34,6 +34,13 @@ export function transformCode(
 
   // 各行を解析
   for (const line of lines) {
+    // コメント行を無視
+    if (line.startsWith("//")) {
+      continue;
+    }
+    if (!line) {
+      continue;
+    }
     // 変数定義の行を解析
     const varDefMatch = line.match(/^(\w+)\s*=\s*(.+)$/);
     if (varDefMatch) {
@@ -87,10 +94,6 @@ export function transformCode(
     const sikiResult = Siki(line);
     if (sikiResult != "No Siki") {
       newCode.push(`return ${sikiResult}`);
-      continue;
-    }
-
-    if (!line) {
       continue;
     }
 

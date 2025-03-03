@@ -9,9 +9,10 @@ function test2() {
 }
 
 const oldCode = `
-a = 5^5
-imp(test2)()
-a^2
+// a = 5^5
+// imp(test2)()
+// a^2
+e
 `;
 const inps = inpOutputList(oldCode);
 const inpd:(string | number)[] | undefined = []
@@ -25,8 +26,10 @@ inps.forEach((inp) => {
   }
 })
 console.log(inpOutputList(oldCode));
+console.time("変形時間");
 const newCode = transformCode(oldCode, {mod:{ kuro, miritime,test,test2 },inpd}); // 変数のマップを渡す
-console.log(newCode);
+console.timeEnd("変形時間");
+console.debug(newCode);
 //ラッピングの処理
 const consolelog = console.log;
 console.log = (...args: unknown[]) => {consolelog("🏃Running:", ...args)};
