@@ -1,5 +1,5 @@
 # Keisangengo
-
+## (日本語話者の方はこちら!!)[./README.ja.md]
 Languages developed to do calculations 仕様はわかるけど正規表現が何とも...
 
 ## How to use
