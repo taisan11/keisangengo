@@ -1,8 +1,13 @@
 {
+  "name": "@taisan11/keisangengo",
+  "version": "0.1.0",
+  "license": "MIT",
   "tasks": {
     "dev": "deno run -A --watch main.ts",
     "build": "deno run -A build.ts"
   },
   "imports": {
-  }
+  },
+  "exports":"./mod.ts",
+  "exclude": ["./benchmark", "./test","./.vscode"]
 }
