@@ -50,10 +50,10 @@ export function transformCode(
       //inpMatchは質問文も含まれる。
       const inpMatch = 変数の値.match(/^inp\((.+)\)$/);
       if (inpMatch) {
-        inpCount++;
         if (inpd && inpd.length > inpCount) {
           // inpdが存在し、まだ使用されていない値がある場合、その値を直接代入
           newCode.push(`let ${varDefMatch[1]} = ${inpd[inpCount]}`);
+          inpCount++;
           continue;
         } else {
           // プロンプトのハードコードをやめてエラーを返す。
