@@ -5,11 +5,11 @@
       "name": "docs",
       "dependencies": {
         "@taisan11/keisangengo": "npm:@jsr/taisan11__keisangengo",
-        "simpledotcss": "^2.3.4",
+        "simpledotcss": "latest",
       },
       "devDependencies": {
-        "typescript": "~5.7.2",
-        "vite": "^6.2.0",
+        "typescript": "latest",
+        "vite": "latest",
       },
     },
   },
@@ -102,7 +102,7 @@
 
     "@rollup/rollup-win32-x64-msvc": ["@rollup/rollup-win32-x64-msvc@4.35.0", "", { "os": "win32", "cpu": "x64" }, "sha512-PIQeY5XDkrOysbQblSW7v3l1MDZzkTEzAfTPkj5VAu3FW8fS4ynyLg2sINp0fp3SjZ8xkRYpLqoKcYqAkhU1dw=="],
 
-    "@taisan11/keisangengo": ["@jsr/taisan11__keisangengo@0.1.0", "https://npm.jsr.io/~/11/@jsr/taisan11__keisangengo/0.1.0.tgz", {}, "sha512-31fN+0bBMxJCSH+QbEWzQB2lK2+lPkviNMQe9P0dvcbjtRnKhkVQIzXrwbFs+t+jPupA1k90zbQ9j11YKa2wLA=="],
+    "@taisan11/keisangengo": ["@jsr/taisan11__keisangengo@0.1.1", "https://npm.jsr.io/~/11/@jsr/taisan11__keisangengo/0.1.1.tgz", {}, "sha512-JGL2timGh6GF1IkgRtdp88+FdfE0TsdvgWU20N6vU5H888exoSA5fbINWnVGIUX81pTFd73FV0YzQYgoHIzC5g=="],
 
     "@types/estree": ["@types/estree@1.0.6", "", {}, "sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw=="],
 
@@ -122,7 +122,7 @@
 
     "source-map-js": ["source-map-js@1.2.1", "", {}, "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA=="],
 
-    "typescript": ["typescript@5.7.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="],
+    "typescript": ["typescript@5.8.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ=="],
 
     "vite": ["vite@6.2.1", "", { "dependencies": { "esbuild": "^0.25.0", "postcss": "^8.5.3", "rollup": "^4.30.1" }, "optionalDependencies": { "fsevents": "~2.3.3" }, "peerDependencies": { "@types/node": "^18.0.0 || ^20.0.0 || >=22.0.0", "jiti": ">=1.21.0", "less": "*", "lightningcss": "^1.21.0", "sass": "*", "sass-embedded": "*", "stylus": "*", "sugarss": "*", "terser": "^5.16.0", "tsx": "^4.8.1", "yaml": "^2.4.2" }, "optionalPeers": ["@types/node", "jiti", "less", "lightningcss", "sass", "sass-embedded", "stylus", "sugarss", "terser", "tsx", "yaml"], "bin": { "vite": "bin/vite.js" } }, "sha512-n2GnqDb6XPhlt9B8olZPrgMD/es/Nd1RdChF6CBD/fHW6pUyUTt2sQW2fPRX5GiD9XEa6+8A6A4f2vT6pSsE7Q=="],
   }
